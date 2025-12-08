@@ -1,40 +1,24 @@
 use crate::{Solution, SolutionPair};
 use std::u64;
 
-#[test]
-fn test() {
-    assert_eq!(solve(), (Solution::from(3u64), Solution::from(6u64)));
-}
+/**
+ * Part 1:
+ * 0 to 99 (over flowing and underflowing)
+ * Always starts at 50
+ * Puzzle Input starts with L or R for left and right
+ * R means number gets bigger, L smaller
+ * Start at 11 + R7 = 18
+ * Start at 11 + L7 = 4
+ * Count how many times we land EXACTLY at 0
+ * Moving over zero like from 99 to 1 with R2 will not count
+ * The solution is a positive number, depending how often we move over zero
+ *
+ * Part 2:
+ * Now count at any time we cross the number zero, not just when we exactly land on zero
+ */
 
-// 0 to 99 (over flowing and underflowing)
-// Always starts at 50
-// Puzzle Input starts with L or R for left and right
-// R means number gets bigger, L smaller
-// Start at 11 + R7 = 18
-// Start at 11 + L7 = 4
-// Count how many times we land EXACTLY at 0
-// Moving over zero like from 99 to 1 with R2 will not count
-// The solution is a positive number, depending how often we move over zero
-
-// For part 2
-// Now count at any time we cross the number zero, not just when we exactly land on zero
-
-pub fn solve() -> SolutionPair {
-    let input;
-    if cfg!(test) {
-        input = "L68
-                 L30
-                 R48
-                 L5
-                 R60
-                 L55
-                 L1
-                 L99
-                 R14
-                 L82";
-    } else {
-        input = include_str!("./day01-input.txt");
-    }
+fn solve() -> (u64, u64) {
+    let input = input();
 
     let mut times_at_zero: u64 = 0;
     let mut times_we_went_over_zero: u64 = 0;
@@ -58,13 +42,9 @@ pub fn solve() -> SolutionPair {
         },
     );
 
-    return (
-        Solution::from(times_at_zero),
-        Solution::from(times_at_zero + times_we_went_over_zero),
-    );
+    return (times_at_zero, times_at_zero + times_we_went_over_zero);
 }
 
-#[derive(Debug)]
 pub struct Lock {
     position: i64,
 }
@@ -112,13 +92,11 @@ impl Lock {
     }
 }
 
-#[derive(Debug)]
 enum Direction {
     Left,
     Right,
 }
 
-#[derive(Debug)]
 struct LockOperation {
     pub direction: Direction,
     pub distance: u16,
@@ -143,4 +121,23 @@ fn parse_input(input: &str) -> Vec<LockOperation> {
             }
         })
         .collect::<Vec<LockOperation>>();
+}
+
+#[cfg(test)]
+fn input() -> &'static str {
+    return "L68\nL30\nR48\nL5\nR60\nL55\nL1\nL99\nR14\nL82\n";
+}
+#[cfg(not(test))]
+fn input() -> &'static str {
+    return include_str!("./day01-input.txt");
+}
+
+#[test]
+fn test() {
+    assert_eq!(solve(), (3, 6));
+}
+
+pub fn get_solution() -> SolutionPair {
+    let solved = solve();
+    return (Solution::from(solved.0), Solution::from(solved.1));
 }

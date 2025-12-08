@@ -61,13 +61,13 @@ fn main() {
 pub type SolutionPair = (Solution, Solution);
 
 use days::{
-    day01, day02, day03, day04, day05, day06, day07, day08, day09, day10, day11, day12, day13,
-    day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25,
+    day02, day03, day04, day05, day06, day07, day08, day09, day10, day11, day12, day13, day14,
+    day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25,
 };
 
 fn get_day_solver(day: u8) -> fn() -> SolutionPair {
     match day {
-        1 => day01::solve,
+        1 => days::day01::get_solution,
         2 => day02::solve,
         3 => day03::solve,
         4 => day04::solve,
