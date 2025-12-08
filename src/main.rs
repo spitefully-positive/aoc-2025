@@ -1,10 +1,9 @@
-mod cli;
 mod days;
 mod etc;
 
 use clap::Parser;
-use cli::Args;
 use etc::Solution;
+use etc::cli::Args;
 use std::time::{Duration, Instant};
 
 fn main() {
@@ -60,38 +59,33 @@ fn main() {
 
 pub type SolutionPair = (Solution, Solution);
 
-use days::{
-    day02, day03, day04, day05, day06, day07, day08, day09, day10, day11, day12, day13, day14,
-    day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25,
-};
-
 fn get_day_solver(day: u8) -> fn() -> SolutionPair {
     match day {
         1 => days::day01::get_solution,
-        2 => day02::solve,
-        3 => day03::solve,
-        4 => day04::solve,
-        5 => day05::solve,
-        6 => day06::solve,
-        7 => day07::solve,
-        8 => day08::solve,
-        9 => day09::solve,
-        10 => day10::solve,
-        11 => day11::solve,
-        12 => day12::solve,
-        13 => day13::solve,
-        14 => day14::solve,
-        15 => day15::solve,
-        16 => day16::solve,
-        17 => day17::solve,
-        18 => day18::solve,
-        19 => day19::solve,
-        20 => day20::solve,
-        21 => day21::solve,
-        22 => day22::solve,
-        23 => day23::solve,
-        24 => day24::solve,
-        25 => day25::solve,
+        2 => days::day02::get_solution,
+        3 => days::day03::get_solution,
+        4 => days::day04::get_solution,
+        5 => days::day05::get_solution,
+        6 => days::day06::get_solution,
+        7 => days::day07::get_solution,
+        8 => days::day08::get_solution,
+        9 => days::day09::get_solution,
+        10 => days::day10::get_solution,
+        11 => days::day11::get_solution,
+        12 => days::day12::get_solution,
+        13 => days::day13::get_solution,
+        14 => days::day14::get_solution,
+        15 => days::day15::get_solution,
+        16 => days::day16::get_solution,
+        17 => days::day17::get_solution,
+        18 => days::day18::get_solution,
+        19 => days::day19::get_solution,
+        20 => days::day20::get_solution,
+        21 => days::day21::get_solution,
+        22 => days::day22::get_solution,
+        23 => days::day23::get_solution,
+        24 => days::day24::get_solution,
+        25 => days::day25::get_solution,
         _ => panic!("Day {} was not even considered to be implemented", day),
     }
 }
